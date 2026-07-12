@@ -3,6 +3,15 @@ import * as THREE from "three";
 import gsap from "gsap";
 import "./BushidoIntro.css";
 
+
+const TARGET_HORIZONTAL_FOV_DEG = 63;
+
+function verticalFovForAspect(aspect) {
+  const hFovRad = THREE.MathUtils.degToRad(TARGET_HORIZONTAL_FOV_DEG);
+  const vFovRad = 2 * Math.atan(Math.tan(hFovRad / 2) / aspect);
+  return THREE.MathUtils.radToDeg(vFovRad);
+}
+
 export default function BushidoIntro({ onComplete }) {
   const mountRef = useRef(null);
   const skipRef = useRef(null);
@@ -15,12 +24,13 @@ export default function BushidoIntro({ onComplete }) {
     const mount = mountRef.current;
     let width = mount.clientWidth;
     let height = mount.clientHeight;
+    let aspect = width / height;
 
-    // ---------- Scene setup ----------
+    // -Scene setup-
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x0a0c10, 0.06);
 
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(verticalFovForAspect(aspect), aspect, 0.1, 100);
     camera.position.set(0, 0.4, 11);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -28,7 +38,7 @@ export default function BushidoIntro({ onComplete }) {
     renderer.setSize(width, height);
     mount.appendChild(renderer.domElement);
 
-    // ---------- Lighting ----------
+    // -Lighting-
     const ambient = new THREE.AmbientLight(0x2b3040, 1.1);
     scene.add(ambient);
 
@@ -46,14 +56,15 @@ export default function BushidoIntro({ onComplete }) {
 
     // -Build the katana-
     const swordGroup = new THREE.Group();
+
     const bladeShape = new THREE.Shape();
-    const L = 3.4; 
-    const W = 0.16; 
+    const L = 3.4;
+    const W = 0.16;
     bladeShape.moveTo(0, 0);
-    bladeShape.lineTo(0, L * 0.88); // spine (mune), straight
-    bladeShape.quadraticCurveTo(0, L * 0.97, W * 0.18, L); // tip taper
-    bladeShape.lineTo(-W * 0.85, L * 0.9); // to cutting edge side of tip
-    bladeShape.quadraticCurveTo(-W * 1.05, L * 0.4, -W * 0.7, 0.04); // curved edge (sori)
+    bladeShape.lineTo(0, L * 0.88);
+    bladeShape.quadraticCurveTo(0, L * 0.97, W * 0.18, L);
+    bladeShape.lineTo(-W * 0.85, L * 0.9);
+    bladeShape.quadraticCurveTo(-W * 1.05, L * 0.4, -W * 0.7, 0.04);
     bladeShape.lineTo(0, 0);
 
     const bladeGeo = new THREE.ExtrudeGeometry(bladeShape, {
@@ -77,7 +88,6 @@ export default function BushidoIntro({ onComplete }) {
     const blade = new THREE.Mesh(bladeGeo, bladeMat);
     swordGroup.add(blade);
 
-    // Habaki (gold collar at blade base)
     const habaki = new THREE.Mesh(
       new THREE.CylinderGeometry(0.11, 0.12, 0.13, 16),
       new THREE.MeshStandardMaterial({ color: 0xb08d3e, metalness: 0.85, roughness: 0.3 })
@@ -148,13 +158,16 @@ export default function BushidoIntro({ onComplete }) {
     const handleResize = () => {
       width = mount.clientWidth;
       height = mount.clientHeight;
-      camera.aspect = width / height;
+      aspect = width / height;
+      camera.aspect = aspect;
+      camera.fov = verticalFovForAspect(aspect);
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     };
     window.addEventListener("resize", handleResize);
+    handleResize();
 
-    // -Letter reveal setup -
+    // -Letter reveal setup-
     const letters = wordmarkRef.current
       ? Array.from(wordmarkRef.current.querySelectorAll(".bushido-letter"))
       : [];
@@ -165,14 +178,11 @@ export default function BushidoIntro({ onComplete }) {
     // -Timeline-
     const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
-    // 1. Slide in horizontally from off-screen left
     tl.to(swordGroup.position, { x: -0.4, duration: 1.15, ease: "back.out(1.4)" }, 0);
     tl.to(swordGroup.scale, { x: 1, y: 1, z: 1, duration: 1.15, ease: "back.out(1.4)" }, 0);
 
-    // 2. A glint 
     tl.to(glint, { intensity: 6.5, duration: 0.12, yoyo: true, repeat: 1 }, 1.05);
 
-    // 3. Letter reveal
     tl.to(swordGroup.position, { x: 2.0, duration: 1.3, ease: "power2.inOut" }, 1.45);
     tl.to(swordGroup.position, { y: 0.5, duration: 1.3, ease: "power2.inOut" }, 1.45);
     tl.to(
@@ -181,7 +191,6 @@ export default function BushidoIntro({ onComplete }) {
       1.6
     );
 
-    // 4. Tagline
     tl.to(taglineRef.current, { opacity: 1, y: 0, duration: 0.7 }, 3.0);
     tl.to(enterBtnRef.current, { opacity: 1, y: 0, duration: 0.7, pointerEvents: "auto" }, 3.2);
 
@@ -199,13 +208,12 @@ export default function BushidoIntro({ onComplete }) {
     };
 
     const handleSkip = () => {
-      tl.progress(1); // snap to end state instantly
+      tl.progress(1);
       finish();
     };
     skipRef.current?.addEventListener("click", handleSkip);
     enterBtnRef.current?.addEventListener("click", finish);
 
-    // Auto-enter 
     tl.call(finish, null, 4.2);
 
     // -Cleanup-

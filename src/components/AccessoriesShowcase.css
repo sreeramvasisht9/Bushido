@@ -1,6 +1,7 @@
 .acc-panel {
   position: relative;
   height: 100vh;
+  height: 100dvh;
   scroll-snap-align: start;
   background: #ffffff;
   display: flex;
@@ -32,7 +33,6 @@
   color: #111111;
 }
 
-/* Thumbnail strip */
 .acc-strip {
   display: flex;
   gap: 14px;
@@ -65,7 +65,6 @@
   border-color: #e0221a;
 }
 
-/* Detail */
 .acc-detail {
   flex: 1;
   width: 100%;

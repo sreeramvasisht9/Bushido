@@ -1,6 +1,7 @@
 .cs-wrap {
   position: relative;
   height: 100vh;
+  height: 100dvh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scrollbar-width: none;
@@ -12,6 +13,7 @@
 
 .cs-slide {
   height: 100vh;
+  height: 100dvh;
   scroll-snap-align: start;
 }
 

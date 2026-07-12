@@ -31,13 +31,13 @@ export default function ClothingShowcase() {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     mount.appendChild(renderer.domElement);
 
-    // -Soft red glow 
+    // -Soft white glow 
     const glowCanvas = document.createElement("canvas");
     glowCanvas.width = glowCanvas.height = 512;
     const gctx = glowCanvas.getContext("2d");
     const grad = gctx.createRadialGradient(256, 256, 0, 256, 256, 256);
-    grad.addColorStop(0, "rgba(224,34,26,0.5)");
-    grad.addColorStop(1, "rgba(224,34,26,0)");
+    grad.addColorStop(0, "rgb(255, 255, 255)");
+    grad.addColorStop(1, "rgb(255, 255, 255)");
     gctx.fillStyle = grad;
     gctx.fillRect(0, 0, 512, 512);
     const glowTexture = new THREE.CanvasTexture(glowCanvas);
