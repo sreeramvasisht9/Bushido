@@ -79,3 +79,4 @@ src/
 ## License
 
 This is a personal learning/portfolio project. Feel free to explore the code, but product photography and the Bushido name/branding are not licensed for reuse.
+# Bushido
