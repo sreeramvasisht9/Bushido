@@ -50,6 +50,7 @@
   transform: scale(0.92);
   transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .fs-thumb img {
@@ -73,6 +74,7 @@
   grid-template-columns: 1.1fr 1fr;
   gap: clamp(24px, 5vw, 64px);
   align-items: center;
+  min-height: 0;
 }
 
 .fs-detail-img-wrap {
@@ -148,11 +150,57 @@
   padding-bottom: 3px;
 }
 
+/* Mobile: shrink everything to fit within one screen's height, and
+   allow this panel to scroll internally as a safety net in case a
+   very short device still can't fit it all. */
 @media (max-width: 700px) {
+  .fs-panel {
+    padding: 20px 20px 16px;
+    overflow-y: auto;
+  }
+
+  .fs-head {
+    margin-bottom: 14px;
+  }
+
+  .fs-strip {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .fs-thumb {
+    width: 46px;
+    height: 56px;
+  }
+
   .fs-detail {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
+
   .fs-detail-img-wrap {
-    max-height: 260px;
+    max-height: 180px;
+  }
+
+  .fs-detail-name {
+    margin: 0 0 4px;
+  }
+
+  .fs-detail-price {
+    margin: 0 0 8px;
+  }
+
+  .fs-detail-copy {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin: 0 0 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .fs-shop-link {
+    margin-top: 10px;
   }
 }
