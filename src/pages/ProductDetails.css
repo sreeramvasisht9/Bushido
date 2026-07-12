@@ -1,0 +1,180 @@
+.pd-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 70vh;
+}
+
+.pd-image-wrap {
+  position: relative;
+  background: #f4f4f2;
+}
+
+.pd-image-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #f4f4f2 25%, #e9e9e6 37%, #f4f4f2 63%);
+  background-size: 400% 100%;
+  animation: bhShimmer 1.4s ease infinite;
+}
+
+.pd-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+
+.pd-info {
+  padding: 60px clamp(24px, 4vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pd-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.pd-name {
+  font-family: "Shippori Mincho", serif;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.pd-wishlist-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.pd-price {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.3rem;
+  color: #e0221a;
+  margin-top: 10px;
+}
+
+.pd-desc {
+  color: #6e6e6e;
+  margin-top: 20px;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+.pd-option-group {
+  margin-top: 30px;
+}
+
+.pd-option-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+  margin-bottom: 10px;
+}
+
+.pd-size-row {
+  display: flex;
+  gap: 8px;
+}
+
+.pd-size-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(17, 17, 17, 0.18);
+  background: none;
+  color: #111111;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pd-size-btn.pd-active {
+  border-color: #111111;
+  background: #111111;
+  color: #ffffff;
+}
+
+.pd-color-row {
+  display: flex;
+  gap: 12px;
+}
+
+.pd-color-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid rgba(17, 17, 17, 0.15);
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 0.2s ease;
+}
+
+.pd-color-swatch.pd-active {
+  border-color: #e0221a;
+  transform: scale(1.12);
+}
+
+.pd-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.pd-qty-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(17, 17, 17, 0.15);
+}
+
+.pd-qty-btn {
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.pd-qty-value {
+  width: 30px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.pd-add-btn {
+  margin-top: 20px;
+  width: 220px;
+}
+
+/* Mobile: stack image above info instead of squeezing two columns
+   into a narrow screen (which was cropping the photo into a tall
+   sliver). Image gets its own sensible height instead of stretching
+   to match the info column's height. */
+@media (max-width: 700px) {
+  .pd-section {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-image-wrap {
+    height: 60vh;
+    max-height: 480px;
+  }
+
+  .pd-info {
+    padding: 32px 20px 48px;
+  }
+
+  .pd-name {
+    font-size: 1.6rem;
+  }
+
+  .pd-add-btn {
+    width: 100%;
+  }
+}
