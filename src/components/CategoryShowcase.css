@@ -1,0 +1,57 @@
+.cs-wrap {
+  position: relative;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.cs-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.cs-slide {
+  height: 100vh;
+  scroll-snap-align: start;
+}
+
+.cs-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cs-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.25);
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.35);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.cs-dot:hover {
+  background: #e0221a;
+  border-color: #e0221a;
+  transform: scale(1.15);
+}
+
+.cs-dot.cs-dot-active {
+  background: #e0221a;
+  border-color: #e0221a;
+  transform: scale(1.25);
+}
+
+@media (max-width: 700px) {
+  .cs-dots {
+    right: 14px;
+  }
+}

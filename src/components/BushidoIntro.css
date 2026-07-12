@@ -1,0 +1,126 @@
+@font-face {
+  font-family: "Japan Ramen";
+  src: url("../assets/fonts/JapanRamen.ttf") format("truetype");
+}
+
+@keyframes glow {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(255,0,0,.15));
+  }
+  100% {
+    filter: drop-shadow(0 0 30px rgba(255,0,0,.45));
+  }
+}
+
+.bushido-wordmark {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.bushido-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.bushido-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.bushido-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: clamp(24px, 8vw, 120px);
+  pointer-events: none;
+}
+
+.bushido-wordmark {
+  margin: 0;
+  font-family: "Japan Ramen", sans-serif;
+  font-weight: normal;
+  font-size: clamp(2.4rem, 8vw, 6rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  filter: drop-shadow(0 0 30px rgba(122, 31, 31, 0.25));
+}
+
+.bushido-letter {
+  display: inline-block;
+  will-change: transform, opacity;
+  background: linear-gradient(180deg, #ff0000 0%, #ff0000 55%, #da0a0a 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.bushido-tagline {
+  margin: 18px 0 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+.bushido-enter {
+  pointer-events: auto;
+  margin-top: 40px;
+  padding: 12px 34px;
+  background: transparent;
+  border: 1px solid #111111;
+  color: #111111;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bushido-enter:hover {
+  background: #e0221a;
+  border-color: #e0221a;
+  color: #ffffff;
+  box-shadow: 0 0 24px rgba(224, 34, 26, 0.35);
+}
+
+.bushido-enter:focus-visible,
+.bushido-skip:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 3px;
+}
+
+.bushido-skip {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.bushido-skip:hover {
+  color: #e0221a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bushido-wordmark,
+  .bushido-tagline,
+  .bushido-enter {
+    transition: none !important;
+  }
+}

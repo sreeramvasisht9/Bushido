@@ -1,0 +1,23 @@
+.home-entrance-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.home-entrance-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.home-entrance-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-entrance-wrap {
+    display: none !important;
+  }
+}

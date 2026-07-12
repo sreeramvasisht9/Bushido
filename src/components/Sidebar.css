@@ -1,0 +1,47 @@
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-320px;
+    width:300px;
+    height:100vh;
+    background:#000000;
+    transition:.4s;
+    padding:40px;
+    z-index:1000;
+}
+
+.sidebar.open{
+    left:0;
+    color:white;
+    
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    margin:25px 0;
+    text-decoration:none;
+    font-size:20px;
+}
+
+.sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    opacity:0;
+    pointer-events:none;
+    transition:.4s;
+}
+
+.sidebar-overlay.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.close-btn{
+    background:none;
+    border:none;
+    color:rgb(255, 0, 0);
+    font-size:30px;
+    cursor:pointer;
+}

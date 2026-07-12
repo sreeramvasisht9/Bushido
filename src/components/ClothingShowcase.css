@@ -1,0 +1,175 @@
+.clo-panel {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 56px clamp(20px, 4vw, 64px) 40px;
+  color: #000000;
+}
+
+.clo-top {
+  flex-shrink: 0;
+  margin-bottom: 24px;
+}
+
+.clo-meta {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #e0221a;
+  margin-bottom: 10px;
+}
+
+.clo-title {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 0.95;
+  margin: 0;
+}
+
+.clo-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+  min-height: 0;
+}
+
+.clo-side-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.clo-active-name {
+  font-family: "Inter", sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: #000000;
+  margin: 0 0 8px;
+}
+
+.clo-active-price {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  color: #e0221a;
+  margin: 0 0 26px;
+}
+
+.clo-link {
+  color: #050504;
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e0221a;
+  padding-bottom: 4px;
+}
+
+.clo-stage {
+  position: relative;
+  height: 100%;
+  max-height: 560px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.clo-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.clo-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Left/right arrows */
+.clo-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(251, 250, 247, 0.35);
+  background: rgba(11, 11, 13, 0.35);
+  color: #fbfaf7;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.clo-arrow:hover {
+  background: #e0221a;
+  border-color: #e0221a;
+  transform: translateY(-50%) scale(1.06);
+}
+
+.clo-arrow-left {
+  left: 12px;
+}
+
+.clo-arrow-right {
+  right: 12px;
+}
+
+/* Scroll hint */
+.clo-scroll-hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: rgba(251, 250, 247, 0.75);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.clo-scroll-chevron {
+  font-size: 1.2rem;
+  animation: cloScrollBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes cloScrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .clo-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .clo-stage {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 700px) {
+  .clo-title {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+  .clo-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
